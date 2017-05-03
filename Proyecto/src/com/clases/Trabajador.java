@@ -338,21 +338,43 @@ public class Trabajador {
             return false;
         }
         
-        
-        
-        
-        
-        
-        
     }
-
     
+    //27/04 Miriam
     
-    
-    
-    
-    
-    
+     public static boolean bajaTrabajador(String dni) {
+        try {
+            Conexion.conectar();
+            PreparedStatement ps = Conexion.getConexion().prepareStatement("delete from trabajadores where dni=?");
+            ps.setString(1, dni);
+            ps.execute();
+            ps.close();
+            Conexion.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede efectuar la conexión, hable con el administrador del sistema \n" + ex.getMessage());
+            return false;
+        }
+    }
+     
+     
+     //Eliminar por id de trabajador
+     /*
+     public static boolean bajaTrabajador(BigDecimal id) {
+        try {
+            Conexion.conectar();
+            PreparedStatement ps = Conexion.getConexion().prepareStatement("delete from trabajadores where id=?");
+            ps.setBigDecimal(1,id);
+            ps.execute();
+            ps.close();
+            Conexion.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede efectuar la conexión, hable con el administrador del sistema \n" + ex.getMessage());
+            return false;
+        }
+    }
+*/
 
     @Override
     public String toString() {

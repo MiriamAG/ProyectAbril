@@ -20,6 +20,9 @@ public class TrabajadoresUd extends javax.swing.JFrame {
     private DefaultTableModel trabajadores;
     private List<Trabajador> trabajador;
     private static String docI;
+    
+    /* este hay que quitar de comentarios si se quiere eliminar por id
+    private static BigDecimal id;*/
 
     //listar trabajadores
     private void listarTrabajadores() {
@@ -106,7 +109,7 @@ public class TrabajadoresUd extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
         modificarTrabajador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -234,7 +237,12 @@ public class TrabajadoresUd extends javax.swing.JFrame {
 
         jButton1.setText("Listar");
 
-        jButton2.setText("Eliminar trabajador");
+        eliminar.setText("Eliminar trabajador");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
 
         modificarTrabajador.setText("Modificar trabajador");
         modificarTrabajador.addActionListener(new java.awt.event.ActionListener() {
@@ -270,19 +278,18 @@ public class TrabajadoresUd extends javax.swing.JFrame {
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(uCalle, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(uMovilEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(32, 32, 32)
-                                            .addComponent(uNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(uFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(uMovilEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(uNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(uFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel17)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
@@ -357,7 +364,7 @@ public class TrabajadoresUd extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(modificarTrabajador)
                                         .addGap(345, 345, 345)
-                                        .addComponent(jButton2)
+                                        .addComponent(eliminar)
                                         .addGap(26, 26, 26)))))))
                 .addContainerGap())
         );
@@ -426,7 +433,7 @@ public class TrabajadoresUd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarTrabajador)
-                    .addComponent(jButton2))
+                    .addComponent(eliminar))
                 .addGap(23, 23, 23))
         );
 
@@ -558,6 +565,60 @@ public class TrabajadoresUd extends javax.swing.JFrame {
            
     }//GEN-LAST:event_modificarTrabajadorActionPerformed
 
+    //si queremos eliminar por dni
+    
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // eliminar un trabajador
+        
+        Trabajador.bajaTrabajador(docI);
+
+        //limpio formulario
+        limpiarFormulario();
+
+        //limpio tabla 
+        trabajadores.setRowCount(0);
+
+        //cargo lista de nuevo
+        listarTrabajadores();
+    
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    //si queremos eliminar por id de trabajador:
+    /*
+     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // eliminar un trabajador
+        
+        Trabajador.bajaTrabajador(id);
+
+        //limpio formulario
+        limpiarFormulario();
+
+        //limpio tabla 
+        trabajadores.setRowCount(0);
+
+        //cargo lista de nuevo
+        listarTrabajadores();
+    
+    }                     
+    */
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -595,8 +656,8 @@ public class TrabajadoresUd extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bFiltrar;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
