@@ -7,6 +7,7 @@ package com.clases;
 
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(BigDecimal idVehiculo, String matricula, String marca, String modelo) {
-        this.idVehiculo = idVehiculo;
+    public Vehiculo( String matricula, String marca, String modelo) {
+       
         this.matricula = matricula;
         this.marca = marca;
         this.modelo = modelo;
@@ -136,4 +137,48 @@ public class Vehiculo {
         }
         return vehiculo;
     }
+    
+     public boolean modificarVehiculo(String mat) {
+
+        Conexion.conectar();
+
+        try {
+            PreparedStatement ps = Conexion.getConexion().prepareStatement("UPDATE VEHICULOS SET matricula=?,marca=?,"
+                    +"modelo=? WHERE matricula=?");
+            ps.setString(1, matricula);
+            ps.setString(2, marca);
+            ps.setString(3, modelo);
+            ps.setString(4, mat);
+       
+
+            ps.executeUpdate();
+            ps.close();
+            Conexion.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede efectuar la conexión, hable con el administrador del sistema \n" + ex.getMessage());
+            return false;
+        }
+        
+    }
+     
+     
+     
+     
+     public boolean bajaVehiculo(String mat){
+     
+      try {
+            Conexion.conectar();
+            PreparedStatement ps = Conexion.getConexion().prepareStatement("delete from vehiculos where mat=?");
+            ps.setString(1, mat);
+            ps.execute();
+            ps.close();
+            Conexion.desconectar();
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede efectuar la conexión, hable con el administrador del sistema \n" + ex.getMessage());
+            return false;
+        }
+   
+     }
 }
